@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta name="description" content="An attractive number guessing game UI powered by JS inspired by numbergames.py" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="title">Number<span class="accent">Games</span></div>
+      <div class="subtitle">Guess the number. Beat the clock. Have fun!</div>
+      <div class="header-controls">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme">🌓</button>
+      </div>
+    </header>
+
+    <main class="card" role="main">
+      <!-- decorative animated background blobs -->
+      <div class="bg-blob blob-1"></div>
+      <div class="bg-blob blob-2"></div>
+      <div class="bg-blob blob-3"></div>
+      <section id="menu" class="view">
+        <div class="menu-top">
+          <div class="scoreboard card-sm" aria-live="polite">
+            <div class="scoreboard-header">
+              <h3>Best Scores</h3>
+              <button id="resetScores" class="btn muted small" title="Reset best scores">Reset</button>
+            </div>
+            <ul id="scoreboardList">
+              <li class="score-item" data-diff="easy"><span class="diff">Easy</span><span class="score-value">—</span></li>
+              <li class="score-item" data-diff="medium"><span class="diff">Medium</span><span class="score-value">—</span></li>
+              <li class="score-item" data-diff="hard"><span class="diff">Hard</span><span class="score-value">—</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="menu-row">
+          <button id="playBtn" class="btn primary">Play</button>
+          <button id="difficultyBtn" class="btn">Difficulty</button>
+          <button id="quitBtn" class="btn muted">Quit</button>
+        </div>
+
+        <div class="range-display">
+          Current range: <span id="currentRange">1 - 50 (Medium)</span>
+        </div>
+
+        <!-- footer note removed -->
+      </section>
+
+      <section id="difficultyView" class="view hidden">
+        <h2>Difficulty</h2>
+        <div class="choices">
+          <label><input type="radio" name="difficulty" value="easy" /> Easy (1 - 20)</label>
+          <label><input type="radio" name="difficulty" value="medium" checked /> Medium (1 - 50)</label>
+          <label><input type="radio" name="difficulty" value="hard" /> Hard (1 - 100)</label>
+        </div>
+
+        <div class="buttons">
+          <button id="saveDifficulty" class="btn primary">Save</button>
+          <button id="cancelDifficulty" class="btn muted">Cancel</button>
+        </div>
+      </section>
+
+      <section id="gameView" class="view hidden">
+        <h2>Guess the number</h2>
+
+        <div class="top-info">
+          <div>Range: <strong id="rangeText">1 - 50</strong></div>
+          <div>Time: <span id="timer">0s</span></div>
+          <div>Tries: <span id="tries">0</span></div>
+        </div>
+
+        <div class="game-controls">
+          <input id="guessInput" type="number" inputmode="numeric" placeholder="Enter your guess" />
+          <button id="submitGuess" class="btn primary">Guess</button>
+        </div>
+
+        <div id="message" class="message">Good luck!</div>
+        <div id="proximity" class="proximity">
+          <div class="meter">
+            <div class="fill" style="width:0%"></div>
+          </div>
+          <div class="proximity-text">Distance: —</div>
+        </div>
+        <!-- Guess history removed as requested -->
+
+        <div class="action-row">
+          <button id="playAgain" class="btn">Play again</button>
+          <button id="backToMenu" class="btn muted">Menu</button>
+        </div>
+      </section>
+
+      <section id="resultView" class="view hidden">
+        <div class="result-card">
+          <h2 id="resultTitle">Congratulations!</h2>
+          <p id="resultText"></p>
+          <div id="confetti" class="confetti hidden" aria-hidden="true"></div>
+        </div>
+        <div class="result-meta">
+          <div class="result-scorecard card-sm">
+            <h4>Best Score</h4>
+            <p id="bestScoreText">—</p>
+          </div>
+        </div>
+        <div class="action-row">
+          <button id="newGameBtn" class="btn primary">Play Again</button>
+          <button id="goMenuBtn" class="btn muted">Main Menu</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <!-- footer intentionally left minimal -->
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+/* Basic reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body,#root{height:100%}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;min-height:100vh;color:#0f1724;display:flex;align-items:center;justify-content:center;padding:2rem;background:linear-gradient(135deg,#0f1724,#0b1220);overflow:hidden}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(135deg,#213a9e,#8ad8ff 55%, #ff7b8b);opacity:0.12;filter:blur(36px);z-index:-2}
+.app{width:100%;max-width:900px}
+/* Decorative animated background blobs */
+.bg-blob{position:absolute;border-radius:50%;filter:blur(36px);opacity:0.55;z-index:-3}
+.blob-1{width:420px;height:420px;background:linear-gradient(45deg,#7ee5ff,#b8a2ff);top:-5%;left:-10%;animation:float 8s ease-in-out infinite}
+.blob-2{width:380px;height:380px;background:linear-gradient(45deg,#ffb26b,#ff7b8b);bottom:-8%;right:-6%;animation:float2 10s ease-in-out infinite}
+.blob-3{width:340px;height:340px;background:linear-gradient(45deg,#ffd166,#7ee5ff);top:20%;right:-12%;animation:float 12s ease-in-out infinite}
+@keyframes float{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(18px) translateX(6px)}100%{transform:translateY(0) translateX(0)}}
+@keyframes float2{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(10px) translateX(-10px)}100%{transform:translateY(0) translateX(0)}}
+.app-header{margin-bottom:1rem;text-align:center;color:#fff}
+.title{font-size:2.4rem;font-weight:700;letter-spacing:1px}
+.title .accent{color:#ffd166}
+.title{display:inline-block;position:relative}
+.title .accent{display:inline-block;animation:accentShift 6s linear infinite}
+@keyframes accentShift{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(-2deg)}100%{transform:translateY(0) rotate(0)}}
+.subtitle{opacity:.95;margin-top:.3rem}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));backdrop-filter: blur(10px);-webkit-backdrop-filter: blur(10px);border-radius:16px;padding:2rem;box-shadow:0 10px 60px rgba(8,15,30,0.32);border:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden}
+
+/* Light theme */
+body.light{background:linear-gradient(135deg,#dbeafe,#eaf6ff)}
+body.light::before{opacity:0.06}
+body.light .card{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));border:1px solid rgba(12,43,78,0.06);box-shadow:0 12px 40px rgba(8,24,76,0.08);color:#06122b}
+body.light .subtitle, body.light .title{color:#06112a}
+body.light .btn{color:#06112a}
+body.light .scoreboard, body.light .card-sm{background:rgba(6,18,43,0.02)}
+/* Light theme dark text overrides */
+body.light .app-header{color:#06112a}
+body.light .range-display{color:#06112a}
+body.light .footer-note{color:#06112a}
+body.light .choices label{color:#06112a;background:rgba(6,18,43,0.02)}
+body.light .card-sm{color:#06112a}
+body.light .top-info{color:#06112a}
+body.light .proximity-text{color:#06112a}
+body.light .proximity .meter{background:rgba(6,18,43,0.04)}
+body.light .message{color:#06112a;border-color:rgba(6,18,43,0.06);background:linear-gradient(180deg, rgba(6,18,43,0.02), rgba(255,255,255,0.03))}
+.view{display:block}
+.hidden{display:none}
+.menu-row{display:flex;gap:.6rem;justify-content:center;margin:1rem 0}
+.btn{padding:.8rem 1.1rem;border-radius:10px;border:0;background:rgba(255,255,255,0.06);cursor:pointer;color:#fff;font-weight:700;letter-spacing:0.3px;transition:transform .18s cubic-bezier(.2,.7,.2,1),box-shadow .18s ease}
+.btn:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 12px 26px rgba(0,0,0,0.18)}
+.btn:active{transform:translateY(-1px) scale(.995)}
+.btn.primary{background:linear-gradient(90deg,#ffb26b,#ff7b8b);box-shadow:0 12px 40px rgba(255,123,139,0.2);color:#1b0f1d}
+.btn.muted{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+body.light .btn.muted{border:1px solid rgba(6,18,43,0.08);color:#06112a}
+.range-display{color:#fff;text-align:center;margin-top:0.6rem;opacity:0.95;font-weight:600}
+.footer-note{margin-top:1.2rem;color:#eaf1ff;opacity:0.9;text-align:center}
+.choices{display:flex;flex-direction:column;gap:.6rem;align-items:flex-start;margin:1rem 0}
+.choices label{color:#fff;background:rgba(255,255,255,0.03);padding:.55rem 0.75rem;border-radius:8px;width:100;display:flex;gap:.6rem;align-items:center}
+.buttons{display:flex;gap:.6rem;justify-content:flex-end}
+.game-controls{display:flex;gap:.6rem;margin-top:1rem;align-items:center}
+#guessInput{flex:1;padding:.8rem;border-radius:10px;border:0;font-size:1rem}
+
+/* Make sure the input can shrink properly inside flex layouts on very small screens */
+#guessInput{min-width:0}
+
+.message{margin-top:1rem;padding:0.9rem;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));color:#fff;border:1px solid rgba(255,255,255,0.03);box-shadow:inset 0 2px 8px rgba(0,0,0,0.06);transition:transform .16s ease, background .16s ease}
+
+/* message variants */
+.message.success{background:linear-gradient(90deg,#dcffdf,#d6ffe8);color:#064e3b}
+.message.error{background:linear-gradient(90deg,#ffdada,#ffe3e3);color:#58151a}
+
+/* Improve contrast for dark theme: use darker backgrounds with light text */
+.message{background:linear-gradient(180deg, rgba(10,12,20,0.6), rgba(10,12,20,0.58));color:#f7fbff;border:1px solid rgba(255,255,255,0.06)}
+.message.success{background:linear-gradient(90deg,#0b8f5f,#0f6d47);color:#ffffff}
+.message.error{background:linear-gradient(90deg,#ff6b6b,#b93b3b);color:#ffffff}
+
+/* Light theme overrides: keep the light backgrounds with dark text for good readability */
+body.light .message{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));color:#06112a;border-color:rgba(12,43,78,0.06)}
+body.light .message.success{background:linear-gradient(90deg,#dcffdf,#d6ffe8);color:#064e3b}
+body.light .message.error{background:linear-gradient(90deg,#ffdada,#ffe3e3);color:#58151a}
+
+/* shake for invalid input */
+.shake{animation:shake .45s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+.top-info{display:flex;gap:1rem;justify-content:space-between;color:#fff;align-items:center}
+.top-info strong{font-weight:700}
+.action-row{margin-top:1rem;display:flex;gap:.6rem;justify-content:center;align-items:center}
+.result-card{text-align:center;padding:1.4rem;border-radius:14px;background:rgba(255,255,255,0.03)}
+.confetti{position:relative;height:80px;margin-top:0;overflow:visible}
+/* confetti pieces */
+.confetti-piece{position:absolute;width:10px;height:14px;border-radius:2px;background:#fff;opacity:0;transform:translateY(0) rotate(0deg);animation:confetti-fall 1200ms linear forwards}
+@keyframes confetti-fall{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:1;transform:translateY(120px) rotate(720deg)}}
+/* Responsive */
+.app .subtitle{opacity:0.95;margin-top:.3rem}
+@media (max-width:600px){.top-info{flex-direction:column;align-items:flex-start}
+.menu-row{flex-direction:column}}
+/* small screens must allow scrolling so on-screen keyboards don't occlude controls */
+@media (max-width:600px){
+	body{overflow:auto;padding-bottom:3rem}
+}
+/* mobile: stack the input and guess button so the button is always visible */
+@media (max-width:480px){
+	.game-controls{flex-direction:column;align-items:stretch;gap:.5rem}
+	#guessInput{width:100%;flex:unset}
+	#submitGuess{width:100%;padding:.9rem .95rem;border-radius:10px}
+	/* keep the controls visible as users type on mobile keyboards */
+	.game-controls{position:sticky;bottom:10px;z-index:20;padding-bottom:.5rem}
+}
+/* Extra small styling */
+
+/* Focus styles for accessibility */
+.btn:focus,#guessInput:focus{outline:3px solid rgba(255,123,139,0.18);box-shadow:0 8px 24px rgba(80,120,190,0.12)}
+
+/* pulse on success */
+.pulse{animation:pulse .82s cubic-bezier(.2,.7,.2,1)}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+/* Focus styles for accessibility */
+/* Duplicate focus rules removed earlier (kept more accessible variant above) */
+
+/* Extra UI components: scoreboard, header controls, proximity meter, history */
+.menu-top{display:flex;justify-content:center;margin-bottom:1rem}
+.card-sm{background:rgba(255,255,255,0.02);padding:.8rem;border-radius:10px;color:#fff;box-shadow:0 6px 18px rgba(9,15,26,0.25)}
+.scoreboard{min-width:220px}
+.scoreboard h3{font-size:1rem;margin-bottom:.4rem}
+.scoreboard ul{list-style:none;padding-left:0}
+.scoreboard li{font-size:.92rem;opacity:.92;padding:.18rem 0;display:flex;justify-content:space-between;align-items:center}
+.scoreboard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+.score-item .diff{font-weight:700}
+.score-item .score-value{background:rgba(255,255,255,0.06);padding:.18rem .5rem;border-radius:8px;font-size:.86rem;color:#fff}
+.btn.small{padding:.4rem .6rem;border-radius:8px;font-size:.86rem}
+.scoreboard{position:relative;border-radius:12px;padding:1rem 0.95rem}
+.scoreboard:before{ /* trophy emoji removed per user request */ content:'';}
+.scoreboard{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04)}
+.scoreboard .score-item{padding:.45rem .45rem;border-radius:8px;transition:transform .12s ease,box-shadow .12s ease}
+.scoreboard .score-item:hover{transform:translateY(-4px);box-shadow:0 10px 18px rgba(0,0,0,0.12)}
+.scoreboard .score-value{background:linear-gradient(90deg,#ffd166,#ff7b8b);padding:.18rem .5rem;border-radius:8px;font-size:.86rem;color:#1b0f1d}
+.scoreboard-header h3{display:flex;gap:.5rem;align-items:center}
+.scoreboard-header h3::after{content:'';display:inline-block;width:8px;height:8px;background:linear-gradient(90deg,#ffd166,#ff7b8b);border-radius:50%;margin-left:.45rem}
+.result-meta{display:flex;gap:10px;justify-content:center;margin-top:1rem}
+.result-scorecard{min-width:220px}
+.header-controls{position:absolute;top:8px;right:20px;display:flex;gap:8px}
+.icon-btn{background:rgba(255,255,255,0.03);border-radius:10px;padding:6px 8px;border:0;cursor:pointer;backdrop-filter: blur(4px);}
+.icon-btn{color:#fff}
+body.light .icon-btn{background:rgba(6,18,43,0.02);color:#06112a}
+.icon-btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.16)}
+.icon-btn:focus{outline:2px solid rgba(255,123,139,0.14)}
+.proximity{margin-top:.9rem;display:flex;align-items:center;gap:1rem}
+.proximity .meter{flex:1;background:rgba(255,255,255,0.03);height:10px;border-radius:8px;overflow:hidden}
+.proximity .fill{height:100%;background:linear-gradient(90deg,#ffb26b,#7ee5ff);width:0%}
+.proximity-text{min-width:110px;color:#fff;opacity:.95;font-weight:600}
+/* history removed per user request */
